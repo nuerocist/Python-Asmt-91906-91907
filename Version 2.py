@@ -10,3 +10,13 @@ class Medication:
         self.dosage = dosage
         self.taken = taken
 
+    def mark_as_taken(self):
+        self.taken = True
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "time": self.time,
+            "dosage": self.dosage,
+            "taken": self.taken,
+        }
