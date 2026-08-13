@@ -33,3 +33,8 @@ def load_medications():
     except (json.JSONDecodeError, KeyError):
         print("Could not read saved data. Starting with an empty schedule.\n")
         return []
+
+def save_medications(medications):
+    data = [medication.to_dict() for medication in medications]
+    with open(DATA_FILE, "w") as file:
+        json.dump(data, file, indent=2)
