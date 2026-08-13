@@ -46,3 +46,28 @@ def add_medication(medications):
     medications.append(Medication(name, time, dosage))
     save_medications(medications)
     print(f"{name} added and saved to your schedule.\n")
+
+def view_schedule(medications):
+    if not medications:
+        print("No medications added yet.\n")
+        return
+    print("\nToday's Medication Schedule")
+    print("-" * 30)
+    for i, medication in enumerate(medications, start=1):
+        print(f"{i}. {medication}")
+    print()
+
+def mark_taken(medications):
+    view_schedule(medications)
+    if not medications:
+        return
+    try:
+        choice = int(input("Enter the number of the medication you have taken: "))
+        if 1 <= choice <= len(medications):
+            medications[choice - 1].mark_as_taken()
+            save_medications(medications)
+            print(f"{medications[choice - 1].name} marked as taken and saved.\n")
+        else:
+            print("That number does not match a medication on your list.\n")
+    except ValueError:
+        print("Please enter a valid number.\n")
