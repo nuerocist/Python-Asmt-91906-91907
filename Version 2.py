@@ -38,3 +38,11 @@ def save_medications(medications):
     data = [medication.to_dict() for medication in medications]
     with open(DATA_FILE, "w") as file:
         json.dump(data, file, indent=2)
+
+def add_medication(medications):
+    name = input("Enter medication name: ")
+    time = input("Enter time (HH:MM): ")
+    dosage = input("Enter dosage: ")
+    medications.append(Medication(name, time, dosage))
+    save_medications(medications)
+    print(f"{name} added and saved to your schedule.\n")
