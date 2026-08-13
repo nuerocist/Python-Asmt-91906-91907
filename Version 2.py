@@ -20,3 +20,16 @@ class Medication:
             "dosage": self.dosage,
             "taken": self.taken,
         }
+
+    def __str__(self):
+        status = "Taken" if self.taken else "Not taken"
+        return f"{self.name} - {self.time} - {self.dosage} - {status}"
+
+def load_medications():
+    try:
+        with open(DATA_FILE, "r") as file:
+            data = json.load(file)
+        return [Medication(m["name"], m["time"], m["dosage"], m["taken"]) for m in data]
+    except (json.JSONDecodeError, KeyError):
+        print("Could not read saved data. Starting with an empty schedule.\n")
+        return []
