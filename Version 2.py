@@ -71,3 +71,28 @@ def mark_taken(medications):
             print("That number does not match a medication on your list.\n")
     except ValueError:
         print("Please enter a valid number.\n")
+
+def main():
+    medications = load_medications()
+    while True:
+        print("Medication Reminder - Version 2")
+        print("1. Add a medication")
+        print("2. View today's schedule")
+        print("3. Mark a medication as taken")
+        print("4. Exit")
+        choice = input("Choose an option (1-4): ")
+
+        if choice == "1":
+            add_medication(medications)
+        elif choice == "2":
+            view_schedule(medications)
+        elif choice == "3":
+            mark_taken(medications)
+        elif choice == "4":
+            print("Your schedule has been saved. Goodbye.")
+            break
+        else:
+            print("Please choose a number between 1 and 4.\n")
+
+
+main()
