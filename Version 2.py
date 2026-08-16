@@ -1,6 +1,7 @@
 import json
 import os
 
+# File used to store medication data
 DATA_FILE = "medications.json"
 
 class Medication:
@@ -11,9 +12,11 @@ class Medication:
         self.taken = taken
 
     def mark_as_taken(self):
+        # Updates this medication's status once the user confirms they took it
         self.taken = True
 
     def to_dict(self):
+        # Converts this object into a plain dictionary so it can be saved as JSON
         return {
             "name": self.name,
             "time": self.time,
@@ -22,24 +25,29 @@ class Medication:
         }
 
     def __str__(self):
+        # Controls how a Medication looks when printed
         status = "Taken" if self.taken else "Not taken"
         return f"{self.name} - {self.time} - {self.dosage} - {status}"
 
 def load_medications():
+    # Loads saved medications from file when the program starts
     try:
         with open(DATA_FILE, "r") as file:
             data = json.load(file)
         return [Medication(m["name"], m["time"], m["dosage"], m["taken"]) for m in data]
     except (json.JSONDecodeError, KeyError):
+        # Handles a missing field or a corrupted/unreadable file
         print("Could not read saved data. Starting with an empty schedule.\n")
         return []
 
 def save_medications(medications):
+    # Writes the current list of medications to file, overwriting the old save
     data = [medication.to_dict() for medication in medications]
     with open(DATA_FILE, "w") as file:
         json.dump(data, file, indent=2)
 
 def add_medication(medications):
+    # Prompts the user for details and adds a new medication to the list
     name = input("Enter medication name: ")
     time = input("Enter time (HH:MM): ")
     dosage = input("Enter dosage: ")
@@ -48,6 +56,7 @@ def add_medication(medications):
     print(f"{name} added and saved to your schedule.\n")
 
 def view_schedule(medications):
+    # Displays every medication currently stored, with its status
     if not medications:
         print("No medications added yet.\n")
         return
@@ -58,6 +67,7 @@ def view_schedule(medications):
     print()
 
 def mark_taken(medications):
+    # Lets the user select a medication from the schedule and mark it as taken
     view_schedule(medications)
     if not medications:
         return
