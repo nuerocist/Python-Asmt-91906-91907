@@ -68,3 +68,5 @@ def is_valid_dosage(dosage_str):
     if not number_part.isdigit():
         return False
     return int(number_part) > 0
+
+medications = load_medications()
