@@ -78,3 +78,18 @@ window.geometry("400x450")
 tk.Label(window, text="Medication name").pack()
 name_entry = tk.Entry(window)
 name_entry.pack()
+
+tk.Label(window, text="Time (HH:MM)").pack()
+time_entry = tk.Entry(window)
+time_entry.pack()
+
+tk.Label(window, text="Dosage").pack()
+dosage_entry = tk.Entry(window)
+dosage_entry.pack()
+
+error_label = tk.Label(window, text="", fg="red")
+error_label.pack()
+
+tk.Label(window, text="Today's Schedule").pack(pady=(10, 0))
+schedule_list = tk.Listbox(window, width=50)
+schedule_list.pack(pady=5)
