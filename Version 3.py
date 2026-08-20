@@ -70,3 +70,11 @@ def is_valid_dosage(dosage_str):
     return int(number_part) > 0
 
 medications = load_medications()
+
+window = tk.Tk()
+window.title("Medication Reminder - Version 3")
+window.geometry("400x450")
+
+tk.Label(window, text="Medication name").pack()
+name_entry = tk.Entry(window)
+name_entry.pack()
