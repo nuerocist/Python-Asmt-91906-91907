@@ -93,3 +93,8 @@ error_label.pack()
 tk.Label(window, text="Today's Schedule").pack(pady=(10, 0))
 schedule_list = tk.Listbox(window, width=50)
 schedule_list.pack(pady=5)
+
+def refresh_schedule():
+    schedule_list.delete(0, tk.END)
+    for medication in medications:
+        schedule_list.insert(tk.END, str(medication))
