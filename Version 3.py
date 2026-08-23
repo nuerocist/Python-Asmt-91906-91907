@@ -122,3 +122,19 @@ def add_medication():
     dosage_entry.delete(0, tk.END)
     error_label.config(text="")
     refresh_schedule()
+
+def mark_taken():
+    selection = schedule_list.curselection()
+    if not selection:
+        error_label.config(text="Select a medication first.")
+        return
+    index = selection[0]
+    medications[index].mark_as_taken()
+    save_medications(medications)
+    refresh_schedule()
+
+tk.Button(window, text="Add medication", command=add_medication).pack(pady=5)
+tk.Button(window, text="Mark selected as taken", command=mark_taken).pack(pady=5)
+
+refresh_schedule()
+window.mainloop()
