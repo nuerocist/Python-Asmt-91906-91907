@@ -113,3 +113,12 @@ def add_medication():
     if not is_valid_dosage(dosage):
         error_label.config(text="Dosage must start with a number greater than 0.")
         return
+
+    medications.append(Medication(name, time, dosage))
+    save_medications(medications)
+
+    name_entry.delete(0, tk.END)
+    time_entry.delete(0, tk.END)
+    dosage_entry.delete(0, tk.END)
+    error_label.config(text="")
+    refresh_schedule()
