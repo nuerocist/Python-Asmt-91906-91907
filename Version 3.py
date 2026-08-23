@@ -98,3 +98,18 @@ def refresh_schedule():
     schedule_list.delete(0, tk.END)
     for medication in medications:
         schedule_list.insert(tk.END, str(medication))
+
+def add_medication():
+    name = name_entry.get()
+    time = time_entry.get()
+    dosage = dosage_entry.get()
+
+    if name == "":
+        error_label.config(text="Enter a medication name.")
+        return
+    if not is_valid_time(time):
+        error_label.config(text="Time must be in HH:MM format, e.g. 08:00.")
+        return
+    if not is_valid_dosage(dosage):
+        error_label.config(text="Dosage must start with a number greater than 0.")
+        return
