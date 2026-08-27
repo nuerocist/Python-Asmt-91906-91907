@@ -30,14 +30,18 @@ class Medication:
         return f"{self.name} - {self.time} - {self.dosage} - {status}"
 
 def load_medications():
-    # Loads saved medications from file when the program starts
+    if not os.path.exists(DATA_FILE):
+        return []
     try:
-        with open(DATA_FILE, "r") as file:
-            data = json.load(file)
-        return [Medication(m["name"], m["time"], m["dosage"], m["taken"]) for m in data]
-    except (json.JSONDecodeError, KeyError):
-        # Handles a missing field or a corrupted/unreadable file
-        print("Could not read saved data. Starting with an empty schedule.\n")
+        file = open(DATA_FILE, "r")
+        data = json.load(file)
+        file.close()
+        medications = []
+        for m in data:
+            medications.append(Medication(m["name"], m["time"], m["dosage"], m["taken"]))
+        return medications
+    except (json.JSONDecodeError, KeyError, FileNotFoundError):
+        print("Could not read saved data. Starting with an empty schedule.")
         return []
 
 def save_medications(medications):
